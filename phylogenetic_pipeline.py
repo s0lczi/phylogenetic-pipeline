@@ -307,7 +307,7 @@ if __name__ == '__main__':
                 else:
                     raise Exception("!!!ERROR!!!\n"
                                     "It looks like your 'clusters' directory is empty.\n"
-                                    "You can't perform MSA if there is no sequences to align."
+                                    "You can't perform MSA if there are no sequences to align."
                                     "Please place right files in 'clusters' directory or use mode 'c'.")
             else:
                 raise Exception("!!!ERROR!!!\n"
@@ -315,32 +315,21 @@ if __name__ == '__main__':
                                 "Please run mode 'p' or create suitable directory yourself.")
 
         if 't' in mode:
-            if os.path.exists(f"{analysis_dir}/clusters"):
-                if len(os.listdir(f"{analysis_dir}/clusters")) != 0:
-                    if os.path.exists(f"{analysis_dir}/MSA"):
-                        if len(os.listdir(f"{analysis_dir}/MSA")) != 0:
-                            cluster_count = len([name for name in os.listdir(f"{analysis_dir}/clusters") if
-                                                 os.path.isfile(os.path.join(f"{analysis_dir}/clusters", name))])
-                            construct_nj_trees(cluster_count, analysis_dir)
-                            os.system(f"rm {analysis_dir}/supertree/temp_{family_name}.newick")
-                            print("NJ trees constructed.")
-                        else:
-                            raise Exception("!!!ERROR!!!\n"
-                                            "It looks like your 'MSA' directory is empty.\n"
-                                            "You can't build trees if you don't have files with MSA"
-                                            "Please place right files in 'MSA' directory or use mode 'm'.")
-                    else:
-                        raise Exception("!!!ERROR!!!\n"
-                                        "I don't see 'MSA' directory in your analysis directory.\n"
-                                        "Please run mode 'p' or create suitable directory yourself.")
+            if os.path.exists(f"{analysis_dir}/MSA"):
+                if len(os.listdir(f"{analysis_dir}/MSA")) != 0:
+                    cluster_count = len([name for name in os.listdir(f"{analysis_dir}/MSA") if
+                                         os.path.isfile(os.path.join(f"{analysis_dir}/MSA", name))])
+                    construct_nj_trees(cluster_count, analysis_dir)
+                    os.system(f"rm {analysis_dir}/supertree/temp_{family_name}.newick")
+                    print("NJ trees constructed.")
                 else:
                     raise Exception("!!!ERROR!!!\n"
-                                    "It looks like your 'clusters' directory is empty.\n"
-                                    "You can't perform MSA if there is no sequences to align."
-                                    "Please place right files in 'clusters' directory or use mode 'c'.")
+                                    "It looks like your 'MSA' directory is empty.\n"
+                                    "You can't build trees if you don't have files with MSA"
+                                    "Please place right files in 'MSA' directory or use mode 'm'.")
             else:
                 raise Exception("!!!ERROR!!!\n"
-                                "I don't see 'clusters' directory in your analysis directory.\n"
+                                "I don't see 'MSA' directory in your analysis directory.\n"
                                 "Please run mode 'p' or create suitable directory yourself.")
 
         if 's' in mode:

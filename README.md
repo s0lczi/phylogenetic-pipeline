@@ -1,3 +1,5 @@
+#Phylogenetic-pipeline
+
 In order to run the script you will need following programs installed and added to your computers PATH:
 -blastp
 -mcl
